@@ -13,15 +13,9 @@
 #' @importFrom magrittr %>%
 #' @importFrom dplyr summarise across select mutate case_when left_join bind_rows inner_join filter
 #' @importFrom tidyr pivot_longer
-#' @importFrom tidyselect where
 #' @importFrom tibble as_tibble enframe
 #' @importFrom lubridate is.Date is.POSIXct ymd
 #' @importFrom purrr map_dfr
-#' @examples
-#' make_data_dictionary(data = num,
-#'                      description_table = description_table,
-#'                      table_ID = "num_ID,
-#'                      keep_table_ID = TRUE)
 #'
 #' @export
 
@@ -71,10 +65,10 @@ get_range <- function(data){
   range <- data %>%
     as_tibble() %>%
     summarise(
-      across(where(is.character), ~ paste(min(., na.rm = TRUE), max(., na.rm = TRUE), sep = " - ")),
-      across(where(is.numeric), ~paste(round(min(., na.rm = TRUE), 3),round(max(., na.rm = TRUE), 3), sep = " - ")),
-      across(where(is.Date), ~paste(min(., na.rm = TRUE), max(., na.rm = TRUE), sep = " - ")),
-      across(where(is.POSIXct), ~paste(min(., na.rm = TRUE), max(., na.rm = TRUE), sep = " - "))
+      across(tidyselect::vars_select_helpers$where(is.character), ~ paste(min(., na.rm = TRUE), max(., na.rm = TRUE), sep = " - ")),
+      across(tidyselect::vars_select_helpers$where(is.numeric), ~paste(round(min(., na.rm = TRUE), 3),round(max(., na.rm = TRUE), 3), sep = " - ")),
+      across(tidyselect::vars_select_helpers$where(is.Date), ~paste(min(., na.rm = TRUE), max(., na.rm = TRUE), sep = " - ")),
+      across(tidyselect::vars_select_helpers$where(is.POSIXct), ~paste(min(., na.rm = TRUE), max(., na.rm = TRUE), sep = " - "))
     ) %>%
 
     # make long table
