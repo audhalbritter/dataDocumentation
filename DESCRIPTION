@@ -1,6 +1,6 @@
 Package: dataDocumentation
 Title: Between the Fjord data documentation
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
     person("Aud", "Halbritter", , "aud.halbritter@uib.no", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-2597-6328"))
@@ -14,3 +14,12 @@ BugReports: https://github.com/audhalbritter/dataDocumentation/issues
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Imports: 
+    lubridate,
+    dplyr (>= 1.0.0),
+    tidyr,
+    tidyselect,
+    purrr,
+    readr,
+    tibble,
+    magrittr

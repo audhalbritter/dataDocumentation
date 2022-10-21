@@ -10,7 +10,7 @@ get_started()
 a directory and a empty description table
 }
 \description{
-Function to make a new directory for the data dictionary directory and a template for the description file.
+Function to make a new directory for the data dictionary directory and a template for the description file. This function should be run first, before making a data dictionary. It only has to be run once.
 }
 \examples{
 get_started()
