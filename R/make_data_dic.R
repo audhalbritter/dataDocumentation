@@ -6,8 +6,6 @@
 #' @param keep_table_ID logical; argument keep table_ID or not.
 #' The default is keep_table_ID = FALSE. If keep_table_ID = TRUE, table_ID argument is kept.
 #'
-#' @details Add something.
-#'
 #' @return a tibble
 #'
 #' @importFrom magrittr %>%
