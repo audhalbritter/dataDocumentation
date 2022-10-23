@@ -152,3 +152,25 @@ data_dic |>
   kable()
 
 ```
+
+
+
+### meta data
+
+The `create_funder_meta_data()` creates a tibble with the complete funder meta data including siteID, blockID, plotID and treatment.
+
+``` {r meta-data, eval=TRUE, echo=TRUE}
+
+meta_data <- create_funder_meta_data()
+
+meta_data
+
+```
+
+If you want to save the document as a csv, add the argument `path` to define where you want it stored and `csv_output = TRUE`.
+
+``` {r meta-data-output, eval=FALSE, echo=TRUE}
+
+meta_data <- create_funder_meta_data(path = "data/Funder_meta_data_2022.csv")
+
+```
