@@ -4,7 +4,10 @@
 \alias{get_started}
 \title{Make data dictionary directory and description file}
 \usage{
-get_started()
+get_started(path = "data_dic")
+}
+\arguments{
+\item{path}{path file for creating directory for data dictionary}
 }
 \value{
 a directory and a empty description table
@@ -13,6 +16,7 @@ a directory and a empty description table
 Function to make a new directory for the data dictionary directory and a template for the description file. This function should be run first, before making a data dictionary. It only has to be run once.
 }
 \examples{
-get_started()
+temp <- tempdir()
+get_started(path = temp)
 
 }

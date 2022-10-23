@@ -22,4 +22,8 @@ Imports:
     purrr,
     readr,
     tibble,
-    magrittr
+    magrittr,
+    rlang
+Depends: 
+    R (>= 2.10)
+LazyData: true
