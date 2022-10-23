@@ -14,7 +14,7 @@ make_data_dictionary(data, description_table, table_ID, keep_table_ID = FALSE)
 \item{table_ID}{if duplicated variable names across datasets, this variable can specify the dataset.}
 
 \item{keep_table_ID}{logical; argument keep table_ID or not.
-The default is keep_table_ID = FALSE. If raw = TRUE, table_ID argument is kept.}
+The default is keep_table_ID = FALSE. If keep_table_ID = TRUE, table_ID argument is kept.}
 }
 \value{
 a tibble
@@ -24,4 +24,12 @@ Function to make a data dictionary from any dataset.
 }
 \details{
 Add something.
+}
+\examples{
+data(description_table)
+data(biomass)
+data_dic <- make_data_dictionary(data = biomass,
+                     description_table = description_table,
+                     table_ID = "biomass",
+                     keep_table_ID = FALSE)
 }
