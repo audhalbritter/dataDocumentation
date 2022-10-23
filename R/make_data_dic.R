@@ -4,21 +4,27 @@
 #' @param description_table a table with additional information inlcuding variable name, description, unit and how variable was measured.
 #' @param table_ID if duplicated variable names across datasets, this variable can specify the dataset.
 #' @param keep_table_ID logical; argument keep table_ID or not.
-#' The default is keep_table_ID = FALSE. If raw = TRUE, table_ID argument is kept.
+#' The default is keep_table_ID = FALSE. If keep_table_ID = TRUE, table_ID argument is kept.
 #'
 #' @details Add something.
 #'
 #' @return a tibble
 #'
 #' @importFrom magrittr %>%
-#' @importFrom dplyr summarise across select mutate case_when left_join bind_rows inner_join filter
+#' @importFrom dplyr summarise across select mutate case_when left_join bind_rows inner_join filter everything all_of if_else
 #' @importFrom tidyr pivot_longer
 #' @importFrom tibble as_tibble enframe
 #' @importFrom lubridate is.Date is.POSIXct ymd
 #' @importFrom purrr map_dfr
-#'
+#' @importFrom rlang .data
+#' @examples
+#' data(description_table)
+#' data(biomass)
+#' data_dic <- make_data_dictionary(data = biomass,
+#'                      description_table = description_table,
+#'                      table_ID = "biomass",
+#'                      keep_table_ID = FALSE)
 #' @export
-
 
 make_data_dictionary <- function(data, description_table, table_ID, keep_table_ID = FALSE){
 
@@ -40,7 +46,7 @@ make_data_dictionary <- function(data, description_table, table_ID, keep_table_I
     range_class %>%
       inner_join(description_table %>%
                    filter(is.na(.data$TableID)) %>%
-                   select(-TableID), by = "Variable name"),
+                   select(-all_of("TableID")), by = "Variable name"),
     # join special variables with same name but different meaning across datasets
     range_class %>%
       inner_join(description_table %>%
@@ -87,7 +93,7 @@ get_class <- function(data){
 
   class <- map_dfr(data %>% as_tibble, ~enframe(class(.x)[1], value = "Variable type"),
                    .id = "Variable name") %>%
-    select(-name) %>%
+    select(-all_of("name")) %>%
 
     # rename class
     mutate(`Variable type` = case_when(`Variable type` %in% c("character", "logical") ~ "categorical",
