@@ -22,9 +22,6 @@ a tibble
 \description{
 Function to make a data dictionary from any dataset.
 }
-\details{
-Add something.
-}
 \examples{
 data(description_table)
 data(biomass)
