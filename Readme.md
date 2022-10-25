@@ -124,3 +124,41 @@ table**. The output looks like this:
 | treatment     | Plant functional groups removed, where F = forbs, G = graminoids, B = bryophytes and C = control, and XC = extra control                                             | categorical   | B - GF                   | NA    | defined      |
 | removed_fg    | Removed functional group, where F = forbs, B = bryophytes, G = graminoids. For extra  controls also L = litter, P = pteridophytes, LI = lichens, and C = cryptograms | categorical   | B - G                    | NA    | defined      |
 | biomass       | Dry weight of removed functional_group                                                                                                                               | numeric       | 0.01 - 32.5              | g     | measured     |
+
+### meta data
+
+The dataDocumentation also provides functions to create metadata for
+FUNDER and ThreeD. The functions are called `create_funder_meta_data()`
+and `create_threed_meta_data()`. These functions creates a tibble with
+the complete meta data including siteID, blockID, treatment and plotID
+for FUNDER. And origin and destination siteID, blockID and plotID,
+turfID, warming, grazing and Nlevel for ThreeD.
+
+Just run the code like this:
+
+``` r
+meta_data <- create_funder_meta_data()
+
+meta_data
+#> # A tibble: 384 × 4
+#>    siteID blockID treatment plotID 
+#>    <chr>  <chr>   <chr>     <chr>  
+#>  1 Alrust Alr1    B         Alr1B  
+#>  2 Alrust Alr1    C         Alr1C  
+#>  3 Alrust Alr1    F         Alr1F  
+#>  4 Alrust Alr1    FB        Alr1FB 
+#>  5 Alrust Alr1    FGB       Alr1FGB
+#>  6 Alrust Alr1    G         Alr1G  
+#>  7 Alrust Alr1    GB        Alr1GB 
+#>  8 Alrust Alr1    GF        Alr1GF 
+#>  9 Alrust Alr2    B         Alr2B  
+#> 10 Alrust Alr2    C         Alr2C  
+#> # … with 374 more rows
+```
+
+If you want to save the document as a csv, add the argument `path` to
+define where you want it stored and `csv_output = TRUE`.
+
+``` r
+meta_data <- create_funder_meta_data(path = "data/Funder_meta_data_2022.csv")
+```

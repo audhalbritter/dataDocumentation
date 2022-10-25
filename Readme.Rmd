@@ -157,7 +157,12 @@ data_dic |>
 
 ### meta data
 
-The `create_funder_meta_data()` creates a tibble with the complete funder meta data including siteID, blockID, plotID and treatment.
+The dataDocumentation also provides functions to create metadata for FUNDER and ThreeD.
+The functions are called `create_funder_meta_data()` and `create_threed_meta_data()`.
+These functions creates a tibble with the complete meta data including siteID, blockID, treatment and plotID for FUNDER.
+And origin and destination siteID, blockID and plotID, turfID, warming, grazing and Nlevel for ThreeD.
+
+Just run the code like this:
 
 ``` {r meta-data, eval=TRUE, echo=TRUE}
 
