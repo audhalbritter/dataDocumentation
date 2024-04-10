@@ -52,47 +52,47 @@ create_threed_meta_data <- function(path = NULL, csv_output = FALSE){
   set.seed(32) # seed is needed to replicate sample_frac
   meta2 <- meta %>%
     # create variable for grazing treatment inside or outside fence
-    mutate(fence = if_else(grazing == "N", "out", "in")) %>%
-    mutate(origSiteID = factor(origSiteID, levels = c("Liahovden", "Joasete", "Vikesland"))) %>%
-    arrange(origSiteID) %>% # site needs to be arranged, because transplant goes only in one direction
-    group_by(origSiteID, origBlockID, Nlevel, fence) %>%
+    mutate(fence = if_else(.data$grazing == "N", "out", "in")) %>%
+    mutate(origSiteID = factor(.data$origSiteID, levels = c("Liahovden", "Joasete", "Vikesland"))) %>%
+    arrange(.data$origSiteID) %>% # site needs to be arranged, because transplant goes only in one direction
+    group_by(.data$origSiteID, .data$origBlockID, .data$Nlevel, .data$fence) %>%
     sample_frac() %>% # randomization
     ungroup() %>%
     bind_cols(origPlotID) %>% # add plotID
     mutate(destSiteID = case_when(
-      origSiteID == "Liahovden" & warming == "A" ~ "Liahovden",
-      origSiteID == "Joasete" & warming == "W" ~ "Vikesland",
+      .data$origSiteID == "Liahovden" & .data$warming == "A" ~ "Liahovden",
+      .data$origSiteID == "Joasete" & .data$warming == "W" ~ "Vikesland",
       TRUE ~ "Joasete")) %>%
-    mutate(destSiteID = factor(destSiteID, levels = c("Liahovden", "Joasete", "Vikesland"))) %>%
+    mutate(destSiteID = factor(.data$destSiteID, levels = c("Liahovden", "Joasete", "Vikesland"))) %>%
     bind_rows(vik) %>% # add Vik
-    group_by(origSiteID, origBlockID, warming, fence) %>%
+    group_by(.data$origSiteID, .data$origBlockID, .data$warming, .data$fence) %>%
     mutate(rownr = row_number())
 
 
   # Join meta2 to warmed plots
   threeD_metadata <- left_join(
-    meta2 %>% filter(origPlotID < 161), # remove plots from vik
+    meta2 %>% filter(.data$origPlotID < 161), # remove plots from vik
     # only warmed plots, remove unused rows
-    meta2 %>% filter(warming == "W") %>% select(-grazing, -destSiteID, destPlotID = origPlotID),
+    meta2 %>% filter(.data$warming == "W") %>% select(-.data$grazing, -.data$destSiteID, destPlotID = .data$origPlotID),
     by = c("destSiteID" = "origSiteID", "origBlockID" = "origBlockID", "rownr" = "rownr", "fence" = "fence", "Nlevel" = "Nlevel", "warming" = "warming"),
     suffix = c("", "_dest")) %>%
-    mutate(destBlockID = origBlockID,
-           destPlotID = ifelse(is.na(destPlotID), origPlotID, destPlotID),
-           turfID = paste0(origPlotID, " ", warming, "N", Nlevel, grazing,  " ", destPlotID)) %>%
+    mutate(destBlockID = .data$origBlockID,
+           destPlotID = ifelse(is.na(.data$destPlotID), .data$origPlotID, .data$destPlotID),
+           turfID = paste0(.data$origPlotID, " ", .data$warming, "N", .data$Nlevel, .data$grazing,  " ", .data$destPlotID)) %>%
     ungroup() %>%
-    select(-fence, -rownr) %>%
+    select(-.data$fence, -.data$rownr) %>%
     # CHANGE PLOTID 23-103 TO 23 AMBIENT, AND 24 TO 24-103 WARMING (wrong turf was transplanted!)
-    mutate(warming = ifelse(origSiteID == "Liahovden" & origPlotID == 23, "A", warming),
-           destPlotID = ifelse(origSiteID == "Liahovden" & origPlotID == 23, 23, destPlotID),
-           turfID = ifelse(origSiteID == "Liahovden" & origPlotID == 23, "23 AN5N 23", turfID),
+    mutate(warming = ifelse(.data$origSiteID == "Liahovden" & .data$origPlotID == 23, "A", .data$warming),
+           destPlotID = ifelse(.data$origSiteID == "Liahovden" & .data$origPlotID == 23, 23, .data$destPlotID),
+           turfID = ifelse(.data$origSiteID == "Liahovden" & .data$origPlotID == 23, "23 AN5N 23", .data$turfID),
 
-           warming = ifelse(origSiteID == "Liahovden" & origPlotID == 24, "W", warming),
-           destPlotID = ifelse(origSiteID == "Liahovden" & origPlotID == 24, 103, destPlotID),
-           turfID = ifelse(origSiteID == "Liahovden" & origPlotID == 24, "24 WN5N 103", turfID)) %>%
-    mutate(destSiteID = as.character(destSiteID)) %>%
-    mutate(destSiteID = case_when(turfID == "23 AN5N 23" ~ "Liahovden",
-                                  turfID == "24 WN5N 103" ~ "Joasete",
-                                  TRUE ~ destSiteID)) |>
+           warming = ifelse(.data$origSiteID == "Liahovden" & .data$origPlotID == 24, "W", .data$warming),
+           destPlotID = ifelse(.data$origSiteID == "Liahovden" & .data$origPlotID == 24, 103, .data$destPlotID),
+           turfID = ifelse(.data$origSiteID == "Liahovden" & .data$origPlotID == 24, "24 WN5N 103", .data$turfID)) %>%
+    mutate(destSiteID = as.character(.data$destSiteID)) %>%
+    mutate(destSiteID = case_when(.data$turfID == "23 AN5N 23" ~ "Liahovden",
+                                  .data$turfID == "24 WN5N 103" ~ "Joasete",
+                                  TRUE ~ .data$destSiteID)) |>
     left_join(NitrogenDictionary, by = "Nlevel")
 
   if(csv_output){
