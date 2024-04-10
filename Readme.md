@@ -50,6 +50,7 @@ The function has one argument `path`, where you can choose the location
 for the new directory. The default is “data_dic”.
 
 ``` r
+
 get_started(path = "data_dic")
 ```
 
@@ -81,11 +82,10 @@ spelled exactly the same as in the dataset.
 **Description** is the description of the variable. It should be concise
 but detailed enough to understand the variable. For example:
 
--   Year of sampling
--   Unique plot ID is a combination of site, block and treatment
--   Removed functional group, including forbs, bryophytes, graminoids.
-    For extra controls also litter, pteridophytes, lichens, and
-    cryptograms
+- Year of sampling
+- Unique plot ID is a combination of site, block and treatment
+- Removed functional group, including forbs, bryophytes, graminoids. For
+  extra controls also litter, pteridophytes, lichens, and cryptograms
 
 **Units** defines the unit of a variable. For example g, cm<sup>3</sup>
 
@@ -102,6 +102,7 @@ The next step is to make the data dictionary. For this you can use the
 `make_data_dic()` function.
 
 ``` r
+
 # load dataset and description table
 data(description_table)
 data(biomass)
@@ -137,6 +138,7 @@ turfID, warming, grazing and Nlevel for ThreeD.
 Just run the code like this:
 
 ``` r
+
 meta_data <- create_funder_meta_data()
 
 meta_data
@@ -153,12 +155,35 @@ meta_data
 #>  8 Alrust Alr1    GF        Alr1GF 
 #>  9 Alrust Alr2    B         Alr2B  
 #> 10 Alrust Alr2    C         Alr2C  
-#> # … with 374 more rows
+#> # ℹ 374 more rows
 ```
 
 If you want to save the document as a csv, add the argument `path` to
 define where you want it stored and `csv_output = TRUE`.
 
 ``` r
+
 meta_data <- create_funder_meta_data(path = "data/Funder_meta_data_2022.csv")
+```
+
+### funcabization
+
+At some sites, FunCaB and FUNDER datasets have different blockID’s. This
+is problematic, when merging datasets from the different project.
+`funcabization()` is a function to solve this problem. This function can
+convert FUNDER terminology to FunCaB terminology and vice versa. Note
+that data on OSF should be on FunCaB nomencaltur.
+
+`funcabization()` has two arguments. The first one is `dat` and takes
+the data for input. The second argument is `covnert_to` and here you
+define if you want to convert a dataset to *FunCaB* or *Funder*
+nomenclature.
+
+``` r
+
+data(funder)
+funcabization(dat = funder, convert_to = "FunCaB")
+
+data(funcab)
+funcabization(dat = funcab, convert_to = "Funder")
 ```

@@ -179,3 +179,27 @@ If you want to save the document as a csv, add the argument `path` to define whe
 meta_data <- create_funder_meta_data(path = "data/Funder_meta_data_2022.csv")
 
 ```
+
+
+
+### funcabization
+
+At some sites, FunCaB and FUNDER datasets have different blockID's.
+This is problematic, when merging datasets from the different project.
+`funcabization()` is a function to solve this problem.
+This function can convert FUNDER terminology to FunCaB terminology and vice versa.
+Note that data on OSF should be on FunCaB nomencaltur.
+
+`funcabization()` has two arguments.
+The first one is `dat` and takes the data for input.
+The second argument is `covnert_to` and here you define if you want to convert a dataset to *FunCaB* or *Funder* nomenclature.
+
+``` {r funcabization, eval=FALSE, echo=TRUE}
+
+data(funder)
+funcabization(dat = funder, convert_to = "FunCaB")
+
+data(funcab)
+funcabization(dat = funcab, convert_to = "Funder")
+
+```
