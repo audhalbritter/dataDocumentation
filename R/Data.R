@@ -17,7 +17,7 @@
 "biomass"
 #'
 #'
-#' #' Description table
+#' Description table
 #'
 #' A table describing the dataset.
 #'
@@ -32,4 +32,45 @@
 #' }
 #' @source \url{https://osf.io/4c5v2/}
 "description_table"
+
+
+#' Block dictionary
+#'
+#' A table block_dictionary.
+#'
+#' @format A tibble with 48 rows and 2 variables:
+#' \describe{
+#'   \item{funder_blockID}{unique code for funder blockID}
+#'   \item{funcab_blockID}{unique code for funcab blockID}
+#'   ...
+#' }
+#' @source \url{https://osf.io/tx9r2/}
+"dic"
+
+
+#' Funder
+#'
+#' A random Funder dataset.
+#'
+#' @format A tibble with 4 rows and 3 variables:
+#' \describe{
+#'   \item{funder_blockID}{unique code for funder blockID}
+#'   \item{var}{random variable}
+#'   \item{treatment}{unique code for treatement}
+#'   ...
+#' }
+"funder"
+
+#' FunCaB
+#'
+#' A random FunCaB dataset.
+#'
+#' @format A tibble with 4 rows and 3 variables:
+#' \describe{
+#'   \item{funder_blockID}{unique code for funder blockID}
+#'   \item{var}{random variable}
+#'   \item{treatment}{unique code for treatement}
+#'   ...
+#' }
+"funcab"
 NULL

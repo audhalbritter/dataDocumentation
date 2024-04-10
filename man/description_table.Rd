@@ -3,7 +3,7 @@
 \docType{data}
 \name{description_table}
 \alias{description_table}
-\title{#' Description table}
+\title{Description table}
 \format{
 A tibble with 192 rows and 7 variables:
 \describe{
