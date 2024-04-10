@@ -18,9 +18,9 @@ a tibble
 Function to Convert funder terminology to funcab terminology and vice versa.
 }
 \examples{
-funder <- tibble(blockID = c("Gud1", "Gud2", "Arh1", "Arh5"), var = c("one", "two", "ding", "dong"), treatment = c("C", "F", "FB", "FBG"))
-funcab <- tibble(blockID = c("Gud5", "Gud12"), var = c("tick", "tack"), treatment = c("FB", "FBG"))
+data(funder)
 funcabization(dat = funder, convert_to = "FunCaB")
+data(funcab)
 funcabization(dat = funcab, convert_to = "Funder")
 
 }

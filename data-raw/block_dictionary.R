@@ -1,8 +1,8 @@
 ## code to prepare `data-raw/FunCab_Funder_blockID_dictionary.csv` dataset goes here
+library(readr)
+library(tibble)
 
-usethis::use_data(data-raw/FunCab_Funder_blockID_dictionary.csv, overwrite = TRUE)
-
-dic <- read_csv("raw_data/FunCab_Funder_blockID_dictionary.csv")
+dic <- read_csv("data-raw/FunCab_Funder_blockID_dictionary.csv")
 
 funder <- tibble(blockID = c("Gud1", "Gud2", "Arh1", "Arh5"),
                  var = c("one", "two", "ding", "dong"),
@@ -11,3 +11,7 @@ funder <- tibble(blockID = c("Gud1", "Gud2", "Arh1", "Arh5"),
 funcab <- tibble(blockID = c("Gud5", "Gud12"),
                  var = c("tick", "tack"),
                  treatment = c("FB", "FBG"))
+
+usethis::use_data(dic, overwrite = TRUE)
+usethis::use_data(funder, overwrite = TRUE)
+usethis::use_data(funcab, overwrite = TRUE)
