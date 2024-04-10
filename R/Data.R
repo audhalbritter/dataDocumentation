@@ -17,7 +17,7 @@
 "biomass"
 #'
 #'
-#' #' Description table
+#' Description table
 #'
 #' A table describing the dataset.
 #'
@@ -34,7 +34,7 @@
 "description_table"
 
 
-#' #' Block dictionary
+#' Block dictionary
 #'
 #' A table block_dictionary.
 #'
@@ -44,11 +44,11 @@
 #'   \item{funcab_blockID}{unique code for funcab blockID}
 #'   ...
 #' }
-#' @source \url{https://osf.io/4c5v2/}
+#' @source \url{https://osf.io/tx9r2/}
 "dic"
 
 
-#' #' Funder
+#' Funder
 #'
 #' A random Funder dataset.
 #'
@@ -61,7 +61,7 @@
 #' }
 "funder"
 
-#' #' FunCaB
+#' FunCaB
 #'
 #' A random FunCaB dataset.
 #'
