@@ -5,9 +5,9 @@
 #'
 #' @return a tibble
 #'
-#' @importFrom magrittr %>%
-#' @importFrom dplyr left_join, mutate, select, coalesce
+#' @importFrom dplyr left_join mutate select coalesce
 #' @importFrom readr read_csv
+#' @importFrom rlang .data
 #'
 #' @examples
 #' data(funder)
@@ -23,20 +23,20 @@ funcabization <- function(dat, convert_to = "FunCaB"){
 
   # convert to FunCaB
   if(convert_to == "FunCaB"){
-    dat %>%
+    dat |>
       # join with dicionary by funder blockID
-      left_join(dic, by = c("blockID" = "funder_blockID")) %>%
-      mutate(blockID = coalesce({{funcab_blockID}}, {{blockID}}),
-             plotID = paste0({{blockID}}, {{treatment}})) %>%
-      select(-{{funcab_blockID}})
+      left_join(dic, by = c("blockID" = "funder_blockID")) |>
+      mutate(blockID = coalesce(.data$funcab_blockID, .data$blockID),
+             plotID = paste0(.data$blockID, .data$treatment)) |>
+      select(-.data$funcab_blockID)
     # convert to Funder
   } else if(convert_to == "Funder") {
-    dat %>%
+    dat |>
       # join with dictionary by funcab blockID
-      left_join(dic, c("blockID" = "funcab_blockID")) %>%
-      mutate(blockID = coalesce({{funder_blockID}}, {{blockID}}),
-             plotID = paste0({{blockID}}, {{treatment}})) %>%
-      select(-{{funder_blockID}})
+      left_join(dic, c("blockID" = "funcab_blockID")) |>
+      mutate(blockID = coalesce(.data$funder_blockID, .data$blockID),
+             plotID = paste0(.data$blockID, .data$treatment)) |>
+      select(-.data$funder_blockID)
   }
 
 }
