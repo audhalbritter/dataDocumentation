@@ -2,20 +2,20 @@
 % Please edit documentation in R/funcabization.R
 \name{funcabization}
 \alias{funcabization}
-\title{Convert funder terminology to funcab terminology and vice versa}
+\title{Convert Funder terminology to FunCaB terminology and vice versa}
 \usage{
 funcabization(dat, convert_to = "FunCaB")
 }
 \arguments{
 \item{dat}{data input file to convert}
 
-\item{convert_to}{Conversion to desired terminology. FunCaB means that Funder terminology is covnerted to FunCaB, and else it is converted to Funder.}
+\item{convert_to}{Conversion to desired terminology. FunCaB means that Funder terminology is converted to FunCaB, and else it is converted to Funder.}
 }
 \value{
 a tibble
 }
 \description{
-Function to Convert funder terminology to funcab terminology and vice versa.
+Function to Convert Funder terminology to FunCaB terminology and vice versa.
 }
 \examples{
 data(funder)

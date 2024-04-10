@@ -1,7 +1,7 @@
-#' Convert funder terminology to funcab terminology and vice versa
-#' @description Function to Convert funder terminology to funcab terminology and vice versa.
+#' Convert Funder terminology to FunCaB terminology and vice versa
+#' @description Function to Convert Funder terminology to FunCaB terminology and vice versa.
 #' @param dat data input file to convert
-#' @param convert_to Conversion to desired terminology. FunCaB means that Funder terminology is covnerted to FunCaB, and else it is converted to Funder.
+#' @param convert_to Conversion to desired terminology. FunCaB means that Funder terminology is converted to FunCaB, and else it is converted to Funder.
 #'
 #' @return a tibble
 #'
