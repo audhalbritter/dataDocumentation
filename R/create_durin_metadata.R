@@ -85,7 +85,11 @@ create_durin_meta_data <- function(study = NULL, csv_output = FALSE, filename = 
   if(csv_output){
 
     if(is.null(filename)){
-      print("Filename missing! No csv has been saved.")
+
+      filepath <- paste0("Durin_", study, ".csv")
+      write_csv(x = durin_metadata,
+                file = filepath)
+
     } else if(!is.null(filename)){
 
       filepath <- paste0("Durin_", study, "_", filename, ".csv")

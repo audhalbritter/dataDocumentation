@@ -99,12 +99,14 @@ create_threed_meta_data <- function(csv_output = FALSE, filename = NULL){
   if(csv_output){
 
     if(is.null(filename)){
-      print("Filename missing! No csv has been saved.")
+      filepath <- paste0("ThreeD_", ".csv")
+      write_csv(x = threeD_metadata,
+                file = filepath)
+    } else {
+      filepath <- paste0("ThreeD_", filename, ".csv")
+      write_csv(x = threeD_metadata,
+                file = filepath)
     }
-
-    filepath <- paste0("ThreeD_", filename, ".csv")
-    write_csv(x = threeD_metadata,
-              file = filepath)
   }
 
   return(threeD_metadata)
