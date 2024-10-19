@@ -45,12 +45,15 @@ create_funder_meta_data <- function(csv_output = FALSE, filename = NULL){
   if(csv_output){
 
     if(is.null(filename)){
-      print("Filename missing! No csv has been saved.")
-    }
-
+      filepath <- paste0("FUNDER_", ".csv")
+      write_csv(x = funder_metadata,
+                file = filepath)
+    } else {
       filepath <- paste0("FUNDER_", filename, ".csv")
       write_csv(x = funder_metadata,
                 file = filepath)
+    }
+
   }
 
   return(funder_metadata)
