@@ -116,24 +116,26 @@ This function gets the **range**, and **class** for each variable in
 your dataset and combines this information with the **description
 table**. The output looks like this:
 
-| Variable name | Description                                                                                                                                                          | Variable type | Variable range or levels | Units | How measured |
-|:--------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------|:-------------------------|:------|:-------------|
-| year          | Year of sampling                                                                                                                                                     | numeric       | 2015 - 2015              | yyyy  | defined      |
-| siteID        | Unique site ID                                                                                                                                                       | categorical   | Gudmedalen - Ulvehaugen  | NA    | defined      |
-| blockID       | Unique block ID a combination of site and block                                                                                                                      | categorical   | Gud12 - Ulv4             | NA    | defined      |
-| plotID        | Unique plot ID is a combination of site, block and treatment                                                                                                         | categorical   | Gud12B - Ulv4GB          | NA    | defined      |
-| treatment     | Plant functional groups removed, where F = forbs, G = graminoids, B = bryophytes and C = control, and XC = extra control                                             | categorical   | B - GF                   | NA    | defined      |
-| removed_fg    | Removed functional group, where F = forbs, B = bryophytes, G = graminoids. For extra  controls also L = litter, P = pteridophytes, LI = lichens, and C = cryptograms | categorical   | B - G                    | NA    | defined      |
-| biomass       | Dry weight of removed functional_group                                                                                                                               | numeric       | 0.01 - 32.5              | g     | measured     |
+| Variable name | Description | Variable type | Variable range or levels | Units | How measured |
+|:---|:---|:---|:---|:---|:---|
+| year | Year of sampling | numeric | 2015 - 2015 | yyyy | defined |
+| siteID | Unique site ID | categorical | Gudmedalen - Ulvehaugen | NA | defined |
+| blockID | Unique block ID a combination of site and block | categorical | Gud12 - Ulv4 | NA | defined |
+| plotID | Unique plot ID is a combination of site, block and treatment | categorical | Gud12B - Ulv4GB | NA | defined |
+| treatment | Plant functional groups removed, where F = forbs, G = graminoids, B = bryophytes and C = control, and XC = extra control | categorical | B - GF | NA | defined |
+| removed_fg | Removed functional group, where F = forbs, B = bryophytes, G = graminoids. For extra  controls also L = litter, P = pteridophytes, LI = lichens, and C = cryptograms | categorical | B - G | NA | defined |
+| biomass | Dry weight of removed functional_group | numeric | 0.01 - 32.5 | g | measured |
 
 ### meta data
 
 The dataDocumentation also provides functions to create metadata for
-FUNDER and ThreeD. The functions are called `create_funder_meta_data()`
-and `create_threed_meta_data()`. These functions creates a tibble with
-the complete meta data including siteID, blockID, treatment and plotID
-for FUNDER. And origin and destination siteID, blockID and plotID,
-turfID, warming, grazing and Nlevel for ThreeD.
+FUNDER, Durin and ThreeD. The functions are called
+`create_funder_meta_data()`, `create_durin_meta_data()` and
+`create_threed_meta_data()`. These functions creates a tibble with the
+complete meta data including siteID, blockID, treatment and plotID for
+FUNDER. For Durin there it can create 3 different meta data tables (see
+below). Origin and destination siteID, blockID and plotID, turfID,
+warming, grazing and Nlevel for ThreeD.
 
 Just run the code like this:
 
@@ -158,13 +160,23 @@ meta_data
 #> # ℹ 374 more rows
 ```
 
-If you want to save the document as a csv, add the argument `path` to
-define where you want it stored and `csv_output = TRUE`.
+If you want to save the metadata as a csv file, set `csv_output = TRUE`
+and choose a file name `filename`. The data will be stored in the
+project directory. The file name always contains the project name
+(FUNDEr, Durin or ThreeD).
 
 ``` r
 
-meta_data <- create_funder_meta_data(path = "data/Funder_meta_data_2022.csv")
+meta_data <- create_funder_meta_data(csv_output = TRUE, filename = "biomass")
 ```
+
+#### Durin meta data
+
+For the Durin project, the meta data can be made for the 4Corners,
+DroughtNet or Nutrient study. The `create_durin_meta_data()` function
+has the argument `study`, which has to be defined. *4Corners*: study on
+the 4 main Durin sites; *DroughtNet*: droughtNet experiment at Lygra and
+Tjotta; *Nutrient*: nutrient experiment at Lygra
 
 ### funcabization
 
