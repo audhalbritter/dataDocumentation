@@ -173,7 +173,7 @@ meta_data
 
 ```
 
-If you want to save the metadata as a csv file, set `csv_output = TRUE` and choose a file name `filename`.
+If you want to save the metadata as a csv file, set `csv_output = TRUE` and you can choose a file name `filename` (not mendatory).
 The data will be stored in the project  directory.
 The file name always contains the project name (FUNDEr, Durin or ThreeD).
 
