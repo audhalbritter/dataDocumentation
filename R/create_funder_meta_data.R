@@ -1,8 +1,8 @@
 #' Create funder meta data
 #' @description Function to make funder meta data.
-#' @param path path for storing csv output. Default is NULL. The path is only needed i csv_output = TRUE.
 #' @param csv_output logical; argument csv_output or not.
-#' The default is csv_output = FALSE. If csv_output = TRUE a csv file is produced and saved under the path name.
+#' The default is csv_output = FALSE. If csv_output = TRUE a csv file is produced and saved in the project directory.
+#' @param filename file name for storing csv output. Default is NULL. The path is only needed i csv_output = TRUE. The file name contains FUNDER_filename.csv, where the file name is defined by the user.csv_output = TRUE a csv file is produced and saved under the path name.
 #'
 #' @return a tibble and optionally a csv file
 #'
@@ -18,7 +18,7 @@
 #' @export
 
 
-create_funder_meta_data <- function(path = NULL, csv_output = FALSE){
+create_funder_meta_data <- function(csv_output = FALSE, filename = NULL){
 
   siteID = c("Arhelleren",
              "Alrust",
@@ -41,10 +41,18 @@ create_funder_meta_data <- function(path = NULL, csv_output = FALSE){
     mutate(plotID = paste0(str_sub(siteID, 1, 3), blockID, treatment),
            blockID = paste0(str_sub(siteID, 1, 3), blockID))
 
+  # create csv output
   if(csv_output){
-    write_csv(funder_metadata, path)
+
+    if(is.null(filename)){
+      print("Filename missing! No csv has been saved.")
+    }
+
+      filepath <- paste0("FUNDER_", filename, ".csv")
+      write_csv(x = funder_metadata,
+                file = filepath)
   }
 
-  funder_metadata
+  return(funder_metadata)
 
 }

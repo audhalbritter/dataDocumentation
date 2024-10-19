@@ -73,4 +73,20 @@
 #'   ...
 #' }
 "funcab"
+
+#' droughNet_meta
+#'
+#' DroughtNet meta data.
+#'
+#' @format A tibble with 54 rows and 6 variables:
+#' \describe{
+#'   \item{site_name}{Unique site name}
+#'   \item{landpress_name}{Site names used in Landpress project}
+#'   \item{geography}{}
+#'   \item{drought_treatment}{DroughtNet treatment which is ambient, moderate or extreme}
+#'   \item{age_class}{Age class of the vegetation representing post-fire successional stages}
+#'   \item{plot}{Unique plot number, anumeric value}
+#'   ...
+#' }
+"droughNet_meta"
 NULL

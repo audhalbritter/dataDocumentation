@@ -4,13 +4,13 @@
 \alias{create_funder_meta_data}
 \title{Create funder meta data}
 \usage{
-create_funder_meta_data(path = NULL, csv_output = FALSE)
+create_funder_meta_data(csv_output = FALSE, filename = NULL)
 }
 \arguments{
-\item{path}{path for storing csv output. Default is NULL. The path is only needed i csv_output = TRUE.}
-
 \item{csv_output}{logical; argument csv_output or not.
-The default is csv_output = FALSE. If csv_output = TRUE a csv file is produced and saved under the path name.}
+The default is csv_output = FALSE. If csv_output = TRUE a csv file is produced and saved in the project directory.}
+
+\item{filename}{file name for storing csv output. Default is NULL. The path is only needed i csv_output = TRUE. The file name contains FUNDER_filename.csv, where the file name is defined by the user.csv_output = TRUE a csv file is produced and saved under the path name.}
 }
 \value{
 a tibble and optionally a csv file
