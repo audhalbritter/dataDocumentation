@@ -24,10 +24,14 @@
 #' @export
 
 
-create_durin_meta_data <- function(study, csv_output = FALSE, filename = NULL){
+create_durin_meta_data <- function(study = NULL, csv_output = FALSE, filename = NULL){
 
-  # meta data 4Corners study
-  if(study == "4Corners"){
+  if(is.null(study)){
+    print("Warning: unknown study type. Choose 4Corners, DroughtNet or Nutrient")
+    durin_metadata <- NULL
+
+    # meta data 4Corners study
+  } else if (study == "4Corners"){
   site <- tibble(site_name = c("Lygra", "Sogndal", "Senja", "Kautokeino"),
          siteID = c("LY", "SO", "SE", "KA"))
   habitat = c("Open", "Forested")
@@ -72,9 +76,9 @@ create_durin_meta_data <- function(study, csv_output = FALSE, filename = NULL){
                block_nr = c("N1", "N2", "N3", "N4", "N5")) |>
       mutate(plotID = paste(block_nr, nitrogen_addition, sep = "-"))
 
-  }  else {
-    # warning if study is missing or misspelled
+  } else {
     print("Warning: unknown study type. Choose 4Corners, DroughtNet or Nutrient")
+      durin_metadata <- NULL
   }
 
   # create csv output
