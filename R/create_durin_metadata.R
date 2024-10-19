@@ -3,7 +3,7 @@
 #' @param study select study for which metadata will be created. 4Corners: study on the 4 main Durin sites; DroughtNet: droughtNet experiment at Lygra and Tjotta; Nutrient: nutrient experiment at Lygra
 #' @param csv_output logical; argument csv_output or not.
 #' The default is csv_output = FALSE. If csv_output = TRUE a csv file is produced and saved in the project directory.
-#' @param filename file name for storing csv output. Default is NULL. The path is only needed i csv_output = TRUE. The file name contains Durin_study_filename.csv, where the filename part is defined by the user.
+#' @param filename file name for storing csv output. Default is NULL. The path is only needed i csv_output = TRUE. The file name contains Durin_study_filename.csv, where the file name is defined by the user.
 #'
 #' @return a tibble and optionally a csv file
 #'
@@ -45,7 +45,7 @@ create_durin_meta_data <- function(study, csv_output = FALSE, filename = NULL){
   # meta data DroughtNet study
   } else if(study == "DroughtNet"){
 
-    meta <- durin_meta |>
+    meta <- droughNet_meta |>
       mutate(plot_nr = str_sub(plot, 1,3)) |>
       mutate(siteID = if_else(site_name == "Lygra", "LY", "TJ"),
              age_classID = case_when(age_class == "Pioneer" ~ "PIO",
