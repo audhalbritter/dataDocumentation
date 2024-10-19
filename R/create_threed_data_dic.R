@@ -95,10 +95,18 @@ create_threed_meta_data <- function(path = NULL, csv_output = FALSE){
                                   TRUE ~ .data$destSiteID)) |>
     left_join(NitrogenDictionary, by = "Nlevel")
 
+  # create csv output
   if(csv_output){
-    write_csv(threeD_metadata, path)
+
+    if(is.null(filename)){
+      print("Filename missing! No csv has been saved.")
+    }
+
+    filepath <- paste0("ThreeD_", filename, ".csv")
+    write_csv(x = threeD_metadata,
+              file = filepath)
   }
 
-  threeD_metadata
+  return(threeD_metadata)
 
 }
